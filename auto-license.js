@@ -86,22 +86,18 @@ function makeLicense(licenseName){
     licenseText = licenseText.replace('@@DATE@@', new Date().getFullYear());
 }
 
-for(let i = 2; i < process.argv.length; ++i){
-    switch(i){
-        case(2):
-            targetDir = process.argv[2];
-            break;
-        case(3) :
-            licenseName = process.argv[3];
-            break;
-        case(4) : 
-            inputName = process.argv[4];
-            break;
-        case(5) : 
-            inputBrief = process.argv[5];
-            break;
-    }
+
+targetDir = process.argv[2];
+licenseName = process.argv[3];
+inputName = process.argv[4];
+inputBrief = process.argv[5];
+
+if(process.argv[2] == '--help' || process.argv[2] == '-h'){
+    console.log('auto license v0.1');
+    console.log('usage:');
+    console.log('  node auto_license.js TARGET_DIR LICENSE_NAME OWNER BRIEF_DESCRIPTION');
+} else {
+    makeLicense(licenseName);
+    walkDir(targetDir);
 }
 
-makeLicense(licenseName);
-walkDir(targetDir);
